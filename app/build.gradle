@@ -1,0 +1,67 @@
+plugins {
+    id 'com.android.application'
+    id 'com.hihonor.mcs.asplugin'
+}
+
+android {
+    namespace 'com.hihonor.mediadata.demo'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.hihonor.mediadata.demo"
+        minSdk 26
+        targetSdk 33
+        versionCode 10000002
+        versionName "1.0.0.2"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('test.jks')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        release {
+            storeFile file('test.jks')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs")
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.hihonor.mcs:media-datacenter:1.0.1.300'
+}
